@@ -1,8 +1,9 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { AnalysisResult } from '../types';
 
-// Use process.env.API_KEY as required by the execution environment.
+// Dette miljø leverer API-nøglen via process.env
 const apiKey = process.env.API_KEY;
+
 if (!apiKey) {
   throw new Error("API_KEY is not defined in the environment.");
 }
