@@ -8,36 +8,52 @@ if (!process.env.API_KEY) {
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
-const responseSchema = {
-  type: Type.OBJECT,
-  properties: {
-    short: {
-      type: Type.STRING,
-      description: "Et kort, hurtigt forslag til AI-forbedring. Maksimalt 2-3 sætninger."
-    },
-    medium: {
-      type: Type.STRING,
-      description: "Et længere, mere detaljeret forslag, der forklarer fordelene og de første skridt. 1-2 afsnit."
-    },
-    detailed: {
-      type: Type.STRING,
-      description: "Et udførligt, strategisk forslag. 3-4 afsnit, der dækker implementering, potentielle teknologier og forventet impact."
-    }
-  },
-  required: ['short', 'medium', 'detailed']
+const getLanguageName = (code: string): string => {
+  const names: { [key: string]: string } = {
+    da: 'Danish',
+    en: 'English',
+    fr: 'French',
+    de: 'German',
+    it: 'Italian',
+    ru: 'Russian',
+    uk: 'Ukrainian',
+  };
+  return names[code] || 'Danish';
 };
 
-export async function getAnalysis(url: string): Promise<AnalysisResult> {
-  const systemInstruction = `Du er en ekspert i AI-forretningsrådgivning med base i Danmark. Dit mål er at levere handlingsorienterede, innovative og personaliserede AI-implementeringsstrategier for danske virksomheder. Du skal altid svare på dansk.`;
+
+export async function getAnalysis(url: string, language: string): Promise<AnalysisResult> {
+  const languageName = getLanguageName(language);
   
-  const prompt = `Analyser den hypotetiske virksomhed repræsenteret ved domænet '${url}'. Baseret på den typiske forretningsmodel for en virksomhed med denne type domænenavn, skal du give tre forskellige forslag til, hvordan de kan udnytte AI til at forbedre deres forretning.
+  const responseSchema = {
+    type: Type.OBJECT,
+    properties: {
+      short: {
+        type: Type.STRING,
+        description: `A short, quick suggestion for AI improvement. Max 2-3 sentences. (in ${languageName})`
+      },
+      medium: {
+        type: Type.STRING,
+        description: `A longer, more detailed suggestion explaining benefits and first steps. 1-2 paragraphs. (in ${languageName})`
+      },
+      detailed: {
+        type: Type.STRING,
+        description: `A comprehensive, strategic proposal. 3-4 paragraphs covering implementation, potential technologies, and expected impact. (in ${languageName})`
+      }
+    },
+    required: ['short', 'medium', 'detailed']
+  };
 
-Forslagene skal struktureres i tre niveauer af detaljer og kompleksitet:
-1.  **short**: Et hurtigt forslag med stor effekt, som kan implementeres med minimale ressourcer.
-2.  **medium**: Et mere detaljeret forslag, der kræver en vis planlægning og investering.
-3.  **detailed**: En omfattende, langsigtet strategisk plan for en større AI-drevet transformation.
+  const systemInstruction = `You are an expert AI business consultant. Your goal is to provide actionable, innovative, and personalized AI implementation strategies for businesses. You must always respond in ${languageName}.`;
+  
+  const prompt = `Analyze the hypothetical business represented by the domain '${url}'. Based on the typical business model for a company with this type of domain name, provide three different suggestions on how they can leverage AI to improve their business.
 
-Sørg for, at dit svar er i det specificerede JSON-format.`;
+The suggestions must be structured in three levels of detail and complexity:
+1.  **short**: A quick, high-impact suggestion that can be implemented with minimal resources.
+2.  **medium**: A more detailed proposal requiring some planning and investment.
+3.  **detailed**: A comprehensive, long-term strategic plan for a major AI-driven transformation.
+
+Ensure your entire response is in ${languageName} and adheres to the specified JSON format.`;
   
   try {
     const response = await ai.models.generateContent({

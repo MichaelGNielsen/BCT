@@ -25,19 +25,23 @@ const logos = [
 
 const allLogos = [...logos, ...logos];
 
-export const SocialProof: React.FC = () => {
+interface SocialProofProps {
+  t: { [key: string]: string };
+}
+
+export const SocialProof: React.FC<SocialProofProps> = ({ t }) => {
   return (
     <section className="w-full flex flex-col items-center gap-12">
       <div className="max-w-3xl text-center">
-        <h2 className="text-3xl md:text-4xl font-bold">Vi har hjulpet flere af Danmarks førende virksomheder</h2>
+        <h2 className="text-3xl md:text-4xl font-bold">{t.socialProofTitle}</h2>
         <p className="mt-4 text-gray-300">
-          Vi har hjulpet over 100+ virksomheder med at opnå digital transformation gennem AI og automation. Fra startups til Fortune 500 selskaber - vores ekspertise skaber værdi på tværs af alle brancher.
+          {t.socialProofSubtitle}
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-700 border border-slate-700 rounded-lg w-full max-w-3xl bg-slate-900/50">
-        <StatCard value="95%" label="Kundetilfredshed" />
-        <StatCard value="3+ års" label="Gennemsnitligt partnerskab" />
-        <StatCard value="40%" label="Gns. effektivitetsforbedring" />
+        <StatCard value={t.stat1Value} label={t.stat1Label} />
+        <StatCard value={t.stat2Value} label={t.stat2Label} />
+        <StatCard value={t.stat3Value} label={t.stat3Label} />
       </div>
       <div className="w-full max-w-4xl relative overflow-hidden group">
         <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-slate-950 to-transparent z-10"></div>

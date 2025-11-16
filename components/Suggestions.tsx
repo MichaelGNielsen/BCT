@@ -4,6 +4,7 @@ import type { AnalysisResult } from '../types';
 
 interface SuggestionsProps {
   analysis: AnalysisResult;
+  t: { [key: string]: string };
 }
 
 const SuggestionCard: React.FC<{ title: string; content: string; icon: React.ReactNode }> = ({ title, content, icon }) => (
@@ -37,14 +38,14 @@ const RocketLaunchIcon = () => (
     </svg>
 );
 
-export const Suggestions: React.FC<SuggestionsProps> = ({ analysis }) => {
+export const Suggestions: React.FC<SuggestionsProps> = ({ analysis, t }) => {
   return (
     <section className="w-full flex flex-col items-center gap-8">
-      <h2 className="text-3xl md:text-4xl font-bold text-center">Dine Personaliserede Anbefalinger</h2>
+      <h2 className="text-3xl md:text-4xl font-bold text-center">{t.suggestionsTitle}</h2>
       <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-1 gap-6">
-        <SuggestionCard title="Hurtigt Forslag" content={analysis.short} icon={<BoltIcon />} />
-        <SuggestionCard title="Udvidet Forslag" content={analysis.medium} icon={<ChartBarIcon />} />
-        <SuggestionCard title="Udførlig Plan" content={analysis.detailed} icon={<RocketLaunchIcon />} />
+        <SuggestionCard title={t.suggestion1Title} content={analysis.short} icon={<BoltIcon />} />
+        <SuggestionCard title={t.suggestion2Title} content={analysis.medium} icon={<ChartBarIcon />} />
+        <SuggestionCard title={t.suggestion3Title} content={analysis.detailed} icon={<RocketLaunchIcon />} />
       </div>
     </section>
   );
