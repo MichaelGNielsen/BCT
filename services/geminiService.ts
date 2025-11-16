@@ -1,11 +1,14 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { AnalysisResult } from '../types';
 
-// API-nøglen leveres sikkert af miljøet.
-const apiKey = process.env.API_KEY;
+// Denne tilgang fungerer i begge miljøer:
+// 1. Lokalt med Vite: Vite definerer `import.meta.env` og indsætter VITE_API_KEY.
+// 2. På platformen: Platformen definerer `process.env` og indsætter API_KEY.
+const apiKey = (import.meta as any).env?.VITE_API_KEY || process.env.API_KEY;
+
 
 if (!apiKey) {
-  throw new Error("API_KEY is not defined in the environment.");
+  throw new Error("API_KEY is not defined. Please check your .env file or the platform environment variables.");
 }
 
 const ai = new GoogleGenAI({ apiKey });
