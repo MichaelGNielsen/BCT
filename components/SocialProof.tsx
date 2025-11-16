@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const StatCard: React.FC<{ value: string; label: string }> = ({ value, label }) => (
@@ -15,15 +14,17 @@ const Logo: React.FC<{ name: string; path: string }> = ({ name, path }) => (
     </svg>
 );
 
-
 const logos = [
-    { name: 'Tryg', path: 'M6,0 L6,10 L12,10 L12,12 L6,12 L6,22 L12,22 L12,24 L6,24 L6,32 L4,32 L4,24 L0,24 L0,22 L4,22 L4,12 L0,12 L0,10 L4,10 L4,0 Z M20,0 L20,32 L18,32 L18,0 Z M24,0 L36,0 L36,2 L26,2 L26,14 L34,14 L34,16 L26,16 L26,30 L36,30 L36,32 L24,32 Z' },
-    { name: 'Nordea', path: 'M40,16 L40,0 L38,0 L38,32 L40,32 L40,18 L50,32 L52,32 L52,0 L50,0 L50,14 L40,0 Z M60,0 L66,0 L70,16 L74,0 L80,0 L72,32 L68,32 Z M84,0 L96,0 L96,2 L86,2 L86,14 L94,14 L94,16 L86,16 L86,30 L96,30 L96,32 L84,32 Z' },
-    { name: 'Wolt', path: 'M98,0 L102,16 L106,0 L110,0 L114,16 L118,0 L122,0 L112,32 L108,32 Z' },
-    { name: 'Vestas', path: 'M0,32 L8,0 L12,0 L4,32 Z M14,0 L22,32 L18,32 L10,0 Z M24,0 L36,0 L36,2 L26,2 L26,14 L34,14 L34,16 L26,16 L26,30 L36,30 L36,32 L24,32 Z' },
+    { name: 'Tryg', path: 'M64 2 C 30 2 20 10 20 16 L 20 22 L 64 30 L 108 22 L 108 16 C 108 10 98 2 64 2 Z' },
+    { name: 'Vestas', path: 'M64 16 L 96 4 L 72 16 L 96 28 Z M64 16 L 32 4 L 56 16 L 32 28 Z' },
+    { name: 'Novo Nordisk', path: 'M64 30 C 40 30 20 15 20 2 M108 2 C 108 15 88 30 64 30' },
+    { name: 'Nilfisk', path: 'M40 30 V 2 H 48 L 76 22 V 2 H 84 V 30 H 76 L 48 10 V 30 H 40 Z' },
+    { name: 'Nykredit', path: 'M64 2 L24 22 H 44 V 30 H 84 V 22 H 104 L 64 2 Z' },
+    { name: 'Maersk', path: 'M64 2 L77 21 L98 21 L81 32 L88 50 L64 38 L40 50 L47 32 L30 21 L51 21 Z' },
+    { name: 'Ørsted', path: 'M64 16 m-14,0 a14,14 0 1,0 28,0 a14,14 0 1,0 -28,0 M64 16 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0' },
 ];
 
-const allLogos = [...logos, ...logos];
+const allLogos = [...logos, ...logos, ...logos];
 
 interface SocialProofProps {
   t: { [key: string]: string };
