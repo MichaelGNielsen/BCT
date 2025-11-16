@@ -1,11 +1,8 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import type { AnalysisResult } from '../types';
 
-if (!process.env.API_KEY) {
-  throw new Error("API_KEY environment variable is not set");
-}
-
+// Fix: Per Gemini API guidelines, initialize GoogleGenAI with process.env.API_KEY.
+// This resolves the TypeScript error on import.meta.env and adheres to the API usage rules.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const getLanguageName = (code: string): string => {
