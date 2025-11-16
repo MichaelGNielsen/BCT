@@ -1,0 +1,5 @@
+{
+  "name": "AI Forretningsanalyse",
+  "description": "En app, der giver personaliserede AI-anbefalinger til virksomheder baseret på deres hjemmeside-URL. Den analyserer virksomhedens potentiale og foreslår tre niveauer af forbedringer.",
+  "requestFramePermissions": []
+}
