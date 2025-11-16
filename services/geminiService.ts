@@ -1,7 +1,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { AnalysisResult } from '../types';
 
-// Dette miljø leverer API-nøglen via process.env
+// API-nøglen leveres sikkert af miljøet.
 const apiKey = process.env.API_KEY;
 
 if (!apiKey) {
